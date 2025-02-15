@@ -1,6 +1,5 @@
 ---
-title: Welcome to Quartz
+title: Welcome to my notebook
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+I'm Abdullah Eskeif a mechanical engineer interested in Turbomachinery and external flows, also I love movies, music, history, coding and learning new languages. 
