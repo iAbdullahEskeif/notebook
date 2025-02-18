@@ -7,7 +7,7 @@ tags:
 
 # the file structure:
 
-![[pics/1739915169.png]]
+![[1739915169.png]]
 
 first of all we have the init.lua file inside the root directory which `requires` what is inside the `Base` directory.
 
