@@ -4,10 +4,7 @@ created: 2025-02-19
 
 ### **1. Local Settings for Terminal Buffers**
 
-lua
-
-Copy
-
+```lua
 local set = vim.opt_local
 
 -- Set local settings for terminal buffers
@@ -19,6 +16,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		set.scrolloff = 0
 	end,
 })
+```
+
 
 #### **What it does:**
 
@@ -55,12 +54,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 ### **2. Easily Exit Terminal Mode**
 
-lua
-
-Copy
-
+```lua
 -- Easily hit escape in terminal mode.
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
+```
+
 
 #### **What it does:**
 
@@ -81,10 +79,7 @@ vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
 ### **3. Open a Terminal at the Bottom of the Screen**
 
-lua
-
-Copy
-
+```lua
 -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set("n", ",st", function()
 	vim.cmd.new()
@@ -93,6 +88,7 @@ vim.keymap.set("n", ",st", function()
 	vim.wo.winfixheight = true
 	vim.cmd.term()
 end)
+```
 
 #### **What it does:**
 

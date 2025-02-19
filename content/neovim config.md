@@ -1,9 +1,8 @@
 ---
 created: 2025-02-19 00:44
-tags: []
 ---
 
-# the file structure:
+# The File Structure:
 
 ![[pics/1739915169.png]]
 
@@ -35,3 +34,23 @@ require("Base.terminal")
 
 
 ### [[set.lua]]
+
+### lazy_init.lua
+
+- This is basically from the `lazy` docs, the only different thing that the `setup` method is looking foe the file `plugin` which contains my plugins files, so it would be more organized, robust and easier to modify and understand.
+
+```lua
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+end ---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	spec = "Base.plugin",
+	change_detection = { notify = false },
+})
+```
+
+### [[terminal.lua]]

@@ -1,6 +1,5 @@
 ---
 created: 2025-02-19
-tags: []
 ---
 - In this file I have set all the remaps for neovim, it is heavily inspired by the [primagen neovim config video](https://www.youtube.com/watch?v=w7i4amO_zaE) and [neovim Kickstarter](https://github.com/nvim-lua/kickstart.nvim)
 
