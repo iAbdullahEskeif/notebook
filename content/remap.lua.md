@@ -5,10 +5,7 @@ tags:
   - configs
   - neovim
 ---
-- In this file I have set all the remaps for neovim, it is heavily inspired by the primagen neovim config video.
-
-> [!NOTE] Note to self
-> add the link of the video here
+- In this file I have set all the remaps for neovim, it is heavily inspired by the [primagen neovim config video](https://www.youtube.com/watch?v=w7i4amO_zaE) and [neovim Kickstarter](https://github.com/nvim-lua/kickstart.nvim)
 
 ## Basics
 
@@ -34,6 +31,7 @@ vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
 ```
 
 - Here <cmd>Example<CR> is how you represent a command.
+
 ### Moving Selected lines:
 ```lua
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Moves the selected lines down by one line
@@ -56,44 +54,90 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz") -- down
 ```
 - here `zz` centers the page.
 
+### Centers the search results
+
+```lua
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "j", "gj")
-vim.keymap.set("n", "k", "gk")
+```
+
+- here `zv` **opens enough folds** to make the current line visible if the search result is inside a folded section of text.
+
+
+### Pastes and delete the content without yanking the deleted text.
+
+```lua
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+```
+
+### Yankes the selected text to the system clipboard
+
+```lua
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+```
+
+### Yankes the entire line to the system clipboard
+
+```lua
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+```
+
+### Disable Ex Mode
+
+- **Disable `Q` (Ex mode)**: Disables the `Q` key to prevent accidental entry into Ex mode.
+```lua
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+```
+### Quickfix and Location List Navigation
+
+- **Next quickfix item**: Moves to the next item in the quickfix list and centers the cursor.
+
+```lua
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz") 
+```
+- **Previous quickfix item**: Moves to the previous item in the quickfix list and centers the cursor.
+
+ ```lua
+ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+  ```
+  
+- **Next location list item**: Moves to the next item in the location list and centers the cursor.
+
+```lua
+ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+```
+
+- **Previous location list item**: Moves to the previous item in the location list and centers the cursor.
+
+```lua
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/<CR>")
-vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd("so")
-end)
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+```
 
 
--- These mappings control the size of splits (height/width)
-vim.keymap.set("n", "<M-,>", "<c-w>5<")
-vim.keymap.set("n", "<M-.>", "<c-w>5>")
-vim.keymap.set("n", "<M-=>", "<C-W>+")
-vim.keymap.set("n", "<M-->", "<C-W>-")
 
+### Search and Replace
 
+- **Search and replace current word**: Opens a search and replace prompt for the word under the cursor.
+
+```lua
+    vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+```
+
+### Clear Search Highlight
+
+- **Clear search highlight**: Clears the search highlight when pressing `Esc`.
+
+```lua
+    vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+```
+
+### Highlight on Yank
+
+- **Highlight yanked text**: Highlights text briefly after yanking (copying).
+
+```lua
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
@@ -101,20 +145,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-local opts = { noremap = true, silent = false }
-
--- Create a new note after asking for its title.
-vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
-
--- Open notes.
-vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)
--- Open notes associated with the selected tags.
-vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts)
-
--- Search for the notes matching a given query.
-vim.api.nvim_set_keymap("n", "<leader>zf",
-	"<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
--- Search for the notes matching the current visual selection.
-vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
-
 ```
