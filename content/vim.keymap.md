@@ -1,9 +1,6 @@
 ---
 created: 2025-02-19
-tags:
-  - neovim
-  - linux
-  - configs
+tags: []
 ---
 - So here in the `lua module` `vim.keymap` we have 2 methods the first one is `del`
 

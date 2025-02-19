@@ -1,8 +1,6 @@
 ---
 created: 2025-02-19 00:44
-tags:
-  - configs
-  - linux
+tags: []
 ---
 
 # the file structure:
@@ -34,3 +32,6 @@ require("Base.terminal")
 
 
 ### [[remap.lua]]
+
+
+### [[set.lua]]
