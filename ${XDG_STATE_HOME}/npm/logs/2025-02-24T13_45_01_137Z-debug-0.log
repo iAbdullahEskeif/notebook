@@ -18,3 +18,9 @@
 17 silly audit bulk request { '@jackyzha0/quartz': [ '4.4.0' ] }
 18 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 2034ms
 19 silly audit report {}
+20 verbose cwd /home/aboud/personal/quartz
+21 verbose os Linux 6.13.4-arch1-1
+22 verbose node v23.8.0
+23 verbose npm  v11.1.0
+24 verbose exit 0
+25 info ok
