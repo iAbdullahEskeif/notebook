@@ -4,10 +4,10 @@ created: 2025-02-19
 - So here in the `lua module` `vim.keymap` we have 2 methods the first one is `del`
 
 ```lua
-vim.keymap.del({modes}, {lhs}, {opts})                    
+vim.keymap.del({modes}, {lhs}, {opts})
 ```
 
-- Remove an existing mapping. Examples: 
+- Remove an existing mapping. Examples:
 
 ```lua
 -- Example 1:
@@ -26,11 +26,11 @@ vim.keymap.del({modes}, {lhs}, {opts})
 - The second method is set and it is pretty clear what it does.
 
 ```lua
-vim.keymap.set({mode}, {lhs}, {rhs}, {opts}) 
+vim.keymap.set({mode}, {lhs}, {rhs}, {opts})
 ```
 
   Adds a new |mapping|. Examples:
-  
+
 ```lua
 -- Map to a Lua function:
 vim.keymap.set('n', 'lhs', function() print("real lua function") end)
@@ -51,7 +51,7 @@ vim.keymap.set('n', '[%%', '<Plug>(MatchitNormalMultiBackward)')
 	  Can also be list of modes to create mapping on multiple modes.
 	• {lhs}   (`string`) Left-hand side |{lhs}| of the mapping.
 	• {rhs}   (`string|function`) Right-hand side |{rhs}| of the mapping can    be a Lua function.
-	• {opts}  (`table?`) Table of |:map-arguments|. 
+	• {opts}  (`table?`) Table of |:map-arguments|.
 		Same as |nvim_set_keymap()| {opts}, except:
 			 • {replace_keycodes} defaults to `true` if "expr" is `true`.
 		Also accepts:
